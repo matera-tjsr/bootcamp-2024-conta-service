@@ -1,5 +1,6 @@
 package com.bootcamp.conta.service.controller;
 
+import com.bootcamp.conta.service.Client;
 import com.bootcamp.conta.service.dto.ContaDTO;
 import com.bootcamp.conta.service.dto.ContaRequestDTO;
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/contas")
 @RestController
+@AllArgsConstructor
 public class ContaController {
 
     private List<ContaDTO> contas = new ArrayList<>();
+
+    private final Client client;
 
     @PostMapping
     public ContaDTO conta(@RequestBody ContaRequestDTO contaRequestDTO){
@@ -52,6 +57,12 @@ public class ContaController {
 
     @GetMapping
     public List<ContaDTO> contas(){
-        return contas;
+        var conta = client.contas(ContaRequestDTO
+                .builder()
+                .numeroConta(1)
+                .numeroAgencia(1)
+                .nome("pepito")
+                .build());
+        return List.of(conta);
     }
 }
