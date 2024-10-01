@@ -1,5 +1,31 @@
 server:
-    port: 9001
+  port: 9000
 spring:
   application:
     name: conta-service
+  datasource:
+    #    url: jdbc:h2:mem:conta_service
+    url: jdbc:h2:file:./data/conta_service
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: TRACE

@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ContaRequestDTO {
-
-    private String nome;
+    private String nomeTitular;
     private Integer numeroAgencia;
-    private Integer numeroConta;
+    private Integer numeroDaConta;
+    private String chavePix;
 }
