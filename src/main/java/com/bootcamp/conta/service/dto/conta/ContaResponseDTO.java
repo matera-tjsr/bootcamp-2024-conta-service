@@ -1,4 +1,4 @@
-package com.bootcamp.conta.service.dto;
+package com.bootcamp.conta.service.dto.conta;
 
 import java.util.UUID;
 import lombok.AllArgsConstructor;

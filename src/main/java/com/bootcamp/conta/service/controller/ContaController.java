@@ -2,9 +2,9 @@ package com.bootcamp.conta.service.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-import com.bootcamp.conta.service.dto.ContaDTO;
-import com.bootcamp.conta.service.dto.ContaRequestDTO;
-import com.bootcamp.conta.service.dto.ContaResponseDTO;
+import com.bootcamp.conta.service.dto.conta.ContaDTO;
+import com.bootcamp.conta.service.dto.conta.ContaRequestDTO;
+import com.bootcamp.conta.service.dto.conta.ContaResponseDTO;
 import com.bootcamp.conta.service.exception.ContaExistenteException;
 import com.bootcamp.conta.service.exception.ContaNaoExisteException;
 import com.bootcamp.conta.service.model.Conta;

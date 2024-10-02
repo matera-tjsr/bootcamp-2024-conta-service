@@ -1,4 +1,4 @@
-package com.bootcamp.conta.service.dto;
+package com.bootcamp.conta.service.dto.conta;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
