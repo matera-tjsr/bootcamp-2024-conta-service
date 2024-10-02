@@ -12,12 +12,11 @@ import lombok.Data;
 @AllArgsConstructor
 public class ContaDTO {
 
-    @JsonIgnore
     private UUID id;
-    private String nome;
+    private String nomeTitular;
     private Integer numeroAgencia;
     private Integer numeroConta;
-    @JsonIgnore
+    private String chavePix;
     private BigDecimal saldo;
 
 }

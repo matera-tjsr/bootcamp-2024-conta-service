@@ -1,5 +1,6 @@
 package com.bootcamp.conta.service.dto;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,9 +8,7 @@ import lombok.Data;
 @Builder
 @Data
 @AllArgsConstructor
-public class ContaRequestDTO {
+public class ContaResponseDTO {
+    private UUID id;
     private String nomeTitular;
-    private Integer numeroAgencia;
-    private Integer numeroConta;
-    private String chavePix;
 }

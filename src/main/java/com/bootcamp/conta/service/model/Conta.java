@@ -39,7 +39,7 @@ public class Conta {
     @Column
     private Integer numeroAgencia;
     @Column
-    private Integer numeroDaConta;
+    private Integer numeroConta;
 
     @Column
     private String chavePix;
