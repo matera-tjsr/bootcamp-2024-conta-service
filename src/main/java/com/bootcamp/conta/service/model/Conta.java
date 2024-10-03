@@ -1,6 +1,7 @@
 package com.bootcamp.conta.service.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,8 +37,10 @@ public class Conta {
 
     @Column
     private String nomeTitular;
+
     @Column
     private Integer numeroAgencia;
+
     @Column
     private Integer numeroConta;
 
@@ -49,5 +52,13 @@ public class Conta {
 
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Pix> historicoPix = new ArrayList<>();
+
+    public void sacar(BigDecimal valor){
+        saldo = this.saldo.subtract(valor);
+    }
+
+    public void depositar(BigDecimal valor){
+        saldo = this.saldo.add(valor);
+    }
 
 }

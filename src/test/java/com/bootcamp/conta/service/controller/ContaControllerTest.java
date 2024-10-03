@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.bootcamp.conta.service.dto.ContaRequestDTO;
+import com.bootcamp.conta.service.dto.conta.ContaRequestDTO;
 import com.bootcamp.conta.service.model.Conta;
 import com.bootcamp.conta.service.repository.ContaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,0 +1,6 @@
+{
+  "chavePixPagador": "martin@pix.com",
+  "chavePixRecebedor": "samuel@pix.com",
+  "valor": 100.00,
+  "idempotencia": 1
+}
