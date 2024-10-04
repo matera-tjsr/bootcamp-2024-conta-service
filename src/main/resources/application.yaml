@@ -29,3 +29,5 @@ logging:
         orm:
           jdbc:
             bind: TRACE
+
+#feign.client.config.default.loggerLevel = full

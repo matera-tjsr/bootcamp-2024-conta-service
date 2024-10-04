@@ -1,25 +1,23 @@
 package com.bootcamp.conta.service.controller;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.bootcamp.conta.service.dto.ContaRequestDTO;
-import com.bootcamp.conta.service.model.Conta;
-import com.bootcamp.conta.service.repository.ContaRepository;
+import com.bootcamp.conta.service.dto.ContaResponseDTO;
+import com.bootcamp.conta.service.service.ContaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.math.BigDecimal;
-import java.util.Optional;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.UUID;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
 class ContaControllerTest {
@@ -28,7 +26,7 @@ class ContaControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ContaRepository contaRepository;
+    private ContaService contaService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -46,22 +44,12 @@ class ContaControllerTest {
 
         UUID idDaContaSalva = UUID.randomUUID();
 
-        Conta contaMock = Conta.builder()
-            .id(idDaContaSalva)
-            .nomeTitular(request.getNomeTitular())
-            .numeroAgencia(request.getNumeroAgencia())
-            .numeroConta(request.getNumeroConta())
-            .chavePix(request.getChavePix())
-            .saldo(BigDecimal.ZERO)
-            .build();
+        ContaResponseDTO contaResponseDTO = ContaResponseDTO.builder()
+                .id(idDaContaSalva)
+                .nomeTitular(request.getNomeTitular())
+                .build();
 
-        when(contaRepository.findByNomeTitularAndNumeroContaAndChavePix(
-            request.getNomeTitular(),
-            request.getNumeroConta(),
-            request.getChavePix()
-        )).thenReturn(Optional.empty());
-
-        when(contaRepository.save(any())).thenReturn(contaMock);
+        when(contaService.criarConta(request)).thenReturn(contaResponseDTO);
 
         mockMvc.perform(post("/api/contas")
             .content(objectMapper.writeValueAsString(request))

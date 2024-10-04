@@ -2,12 +2,14 @@ package com.bootcamp.conta.service.config;
 
 import com.bootcamp.conta.service.exception.ContaExistenteException;
 import com.bootcamp.conta.service.exception.ContaNaoExisteException;
-import java.net.URI;
+import com.bootcamp.conta.service.exception.ErroCadastroChaveBacenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.net.URI;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
@@ -25,6 +27,14 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
         problemDetail.setTitle("Not Found");
         problemDetail.setType(URI.create("http://localhost/9000/doc/conta-nao-existe"));
+        return problemDetail;
+    }
+
+    @ExceptionHandler(ErroCadastroChaveBacenException.class)
+    private ProblemDetail exceptionErroCadastroChaveBacen(ErroCadastroChaveBacenException ex){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        problemDetail.setTitle("Error Bacen");
+        problemDetail.setType(URI.create("http://localhost/9000/doc/error-bacen"));
         return problemDetail;
     }
 
