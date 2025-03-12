@@ -4,6 +4,7 @@ import com.bootcamp.conta.service.dto.ContaDTO;
 import com.bootcamp.conta.service.dto.ContaRequestDTO;
 import com.bootcamp.conta.service.dto.ContaResponseDTO;
 import com.bootcamp.conta.service.service.ContaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,24 +32,22 @@ public class ContaController {
     private final ContaService contaService;
 
     @PostMapping
-    public ResponseEntity<ContaResponseDTO> conta(@RequestBody ContaRequestDTO contaRequestDTO) throws Exception {
+    public ResponseEntity<ContaResponseDTO> conta(@RequestBody @Valid ContaRequestDTO contaRequestDTO) throws Exception {
         ContaResponseDTO contaResponseDTO = contaService.criarConta(contaRequestDTO);
         return new ResponseEntity<>(contaResponseDTO, CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContaResponseDTO> atualizarConta(@RequestBody ContaRequestDTO contaRequestDTO, @PathVariable UUID id) throws Exception {
+    public ResponseEntity<ContaResponseDTO> atualizarConta(@RequestBody @Valid ContaRequestDTO contaRequestDTO, @PathVariable UUID id) throws Exception {
         ContaResponseDTO contaResponseDTO = contaService.atualizarConta(contaRequestDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(contaResponseDTO);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarConta(@PathVariable UUID id) {
         contaService.deletarConta(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<ContaDTO> conta(@PathVariable UUID id) throws Exception {

@@ -5,7 +5,7 @@ import com.bootcamp.conta.service.dto.ContaRequestDTO;
 import com.bootcamp.conta.service.dto.ContaResponseDTO;
 import com.bootcamp.conta.service.exception.ContaExistenteException;
 import com.bootcamp.conta.service.exception.ContaNaoExisteException;
-import com.bootcamp.conta.service.exception.ErroCadastroChaveBacenException;
+import com.bootcamp.conta.service.exception.ErroIntegracaoBacenException;
 import com.bootcamp.conta.service.feign.BacenService;
 import com.bootcamp.conta.service.model.Conta;
 import com.bootcamp.conta.service.repository.ContaRepository;
@@ -28,7 +28,7 @@ public class ContaService {
     private final BacenService bacenService;
 
     @Transactional(
-            rollbackFor = ErroCadastroChaveBacenException.class
+            rollbackFor = ErroIntegracaoBacenException.class
     )
     public ContaResponseDTO criarConta(ContaRequestDTO contaRequestDTO) {
 
@@ -47,7 +47,7 @@ public class ContaService {
                 .numeroAgencia(contaRequestDTO.getNumeroAgencia())
                 .numeroConta(contaRequestDTO.getNumeroConta())
                 .chavePix(contaRequestDTO.getChavePix())
-                .saldo(BigDecimal.ZERO)
+                .saldo(new BigDecimal(5000))
                 .build();
 
         Conta contaSalva = contaRepository.save(conta);

@@ -3,6 +3,7 @@ package com.bootcamp.conta.service.controller;
 import com.bootcamp.conta.service.dto.ContaRequestDTO;
 import com.bootcamp.conta.service.dto.ContaResponseDTO;
 import com.bootcamp.conta.service.service.ContaService;
+import com.bootcamp.conta.service.service.PixService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ class ContaControllerTest {
 
     @MockBean
     private ContaService contaService;
+
+    @MockBean
+    private PixService pixService;
 
     @Autowired
     private ObjectMapper objectMapper;

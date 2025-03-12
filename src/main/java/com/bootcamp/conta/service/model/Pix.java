@@ -8,14 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Builder
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -25,10 +28,11 @@ public class Pix {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @UuidGenerator(style = UuidGenerator.Style.TIME)
     private UUID id;
 
     @Column
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @Column
     private String chavePixPagador;
@@ -38,6 +42,9 @@ public class Pix {
 
     @Column
     private BigDecimal valor;
+
+    @Column(unique = true)
+    private String idempotencia;
 
     @ManyToOne
     @JoinColumn(name = "conta_id")
